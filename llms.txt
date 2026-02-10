@@ -1,0 +1,16 @@
+# BeatOps
+
+> BeatOps is a desktop application that automates beat uploads to YouTube, BeatStars, and SoundCloud for music producers. Available for macOS and Windows.
+
+## Downloads
+
+- [Latest Release](https://github.com/snarebes/BeatOps/releases/latest): Download the latest version
+- [macOS (Apple Silicon)](https://beatops.io/download.html): DMG installer for macOS
+- [Windows](https://beatops.io/download.html): NSIS installer for Windows
+
+## Links
+
+- [Website](https://beatops.io): Product homepage
+- [Features](https://beatops.io/features.html): Feature overview
+- [Pricing](https://beatops.io/pricing.html): Plans and pricing
+- [Help](https://beatops.io/help.html): Documentation and support
