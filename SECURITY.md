@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in BeatOps, please report it responsibly.
 
-**Email:** security@beatops.io
+**Email:** support@beatops.io
 
 Please include:
 - Description of the vulnerability
