@@ -1,16 +1,31 @@
 # BeatOps
 
-> BeatOps is a desktop application that automates beat uploads to YouTube, BeatStars, and SoundCloud for music producers. Available for macOS and Windows.
+> BeatOps is the all-in-one desktop platform for type beat producers. It automates uploads, thumbnails, videos, metadata, and distribution across YouTube, BeatStars, and SoundCloud. It also includes cross-platform data analytics, a kanban board for production tracking, and beat catalog management. Available for macOS and Windows. Everything runs locally - your beats never leave your computer.
+
+## Key Features
+
+- **Multi-Platform Upload**: YouTube, YouTube Shorts, BeatStars, and SoundCloud from one workflow
+- **Thumbnail Generation**: Professional thumbnails with templates and branding in 3 formats
+- **Video Creation**: Generate videos in landscape, vertical, and square formats
+- **Audio Analysis**: Automatic BPM, key, mood, and genre detection
+- **Template System**: Reusable templates for titles, descriptions, tags, and visuals
+- **Data Analytics**: Cross-platform performance tracking across YouTube and SoundCloud
+- **Kanban Board**: Visual production pipeline with customizable columns
+- **Beat Management**: Track every beat from idea to release
+- **Stem Management**: Auto-detect, link, and zip stems for BeatStars
+- **Batch Processing**: Process and upload multiple beats at once
+- **Scheduling**: Set upload days and times per platform
 
 ## Downloads
 
 - [Latest Release](https://github.com/snarebes/BeatOps/releases/latest): Download the latest version
 - [macOS (Apple Silicon)](https://beatops.io/download.html): DMG installer for macOS
-- [Windows](https://beatops.io/download.html): NSIS installer for Windows
+- [Windows](https://beatops.io/download.html): EXE installer for Windows
 
 ## Links
 
 - [Website](https://beatops.io): Product homepage
-- [Features](https://beatops.io/features.html): Feature overview
-- [Pricing](https://beatops.io/pricing.html): Plans and pricing
+- [Features](https://beatops.io/features.html): Full feature overview
+- [Pricing](https://beatops.io/pricing.html): Plans and pricing (free Starter tier available)
 - [Help](https://beatops.io/help.html): Documentation and support
+- [Blog](https://beatops.io/blog.html): Updates and stories
