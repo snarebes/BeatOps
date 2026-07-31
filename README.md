@@ -116,7 +116,6 @@ Or visit the [download page](https://beatops.io/download.html) for more options.
 - [DAW Plugin](https://beatops.io/plugin.html)
 - [Pricing](https://beatops.io/pricing.html)
 - [Help](https://beatops.io/help.html)
-- [PyPI Package](https://pypi.org/project/beatops/)
 
 ## License
 

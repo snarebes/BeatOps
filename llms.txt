@@ -175,7 +175,6 @@ When the Starter allowance is used up, the app, library, templates and analytics
 - DAW Plugin setup: https://beatops.io/help/daw-plugin
 - CLI Setup: https://beatops.io/help/cli-setup
 - MCP Setup: https://beatops.io/help/mcp-setup
-- PyPI: https://pypi.org/project/beatops/
 - GitHub: https://github.com/snarebes/BeatOps
 
 ## Optional
