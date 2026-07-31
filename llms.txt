@@ -1,31 +1,190 @@
 # BeatOps
 
-> BeatOps is the all-in-one desktop platform for type beat producers. It automates uploads, thumbnails, videos, metadata, and distribution across YouTube, BeatStars, and SoundCloud. It also includes cross-platform data analytics, a kanban board for production tracking, and beat catalog management. Available for macOS and Windows. Everything runs locally - your beats never leave your computer.
+> Beat upload automation for music producers. Desktop app, VST3/AU DAW plugin, CLI, and AI agent integration.
 
-## Key Features
+## What is BeatOps
 
-- **Multi-Platform Upload**: YouTube, YouTube Shorts, BeatStars, and SoundCloud from one workflow
-- **Thumbnail Generation**: Professional thumbnails with templates and branding in 3 formats
-- **Video Creation**: Generate videos in landscape, vertical, and square formats
-- **Audio Analysis**: Automatic BPM, key, mood, and genre detection
-- **Template System**: Reusable templates for titles, descriptions, tags, and visuals
-- **Data Analytics**: Cross-platform performance tracking across YouTube and SoundCloud
-- **Kanban Board**: Visual production pipeline with customizable columns
-- **Beat Management**: Track every beat from idea to release
-- **Stem Management**: Auto-detect, link, and zip stems for BeatStars
-- **Batch Processing**: Process and upload multiple beats at once
-- **Scheduling**: Set upload days and times per platform
+BeatOps automates uploading beats to YouTube, SoundCloud, and BeatStars. It handles audio analysis (BPM, key, genre, mood), thumbnail generation, video creation, SEO tags, and scheduled uploads. Available as a desktop app (Mac + Windows), a VST3/AU plugin that publishes from inside your DAW, a command-line tool, and an MCP server for AI agents.
 
-## Downloads
+BeatOps is built for type beat producers who want to spend less time on admin and more time making music. It runs locally: your beats never leave your computer until you explicitly upload them.
 
-- [Latest Release](https://github.com/snarebes/BeatOps/releases/latest): Download the latest version
-- [macOS (Apple Silicon)](https://beatops.io/download.html): DMG installer for macOS
-- [Windows](https://beatops.io/download.html): EXE installer for Windows
+## Quick Start (CLI)
+
+The CLI is included with the BeatOps desktop app; no extra installation needed. Make sure the app is running (the CLI connects to the desktop backend at localhost:7410).
+
+```
+beatops list
+beatops show "my beat"
+beatops upload "my beat" --to youtube
+```
+
+## Quick Start (MCP / AI Agent)
+
+The MCP server is included with the BeatOps desktop app; no extra installation needed.
+
+Add to Claude Desktop config (claude_desktop_config.json):
+```json
+{
+  "mcpServers": {
+    "beatops": {
+      "command": "beatops-mcp"
+    }
+  }
+}
+```
+
+Add to Claude Code (.mcp.json):
+```json
+{
+  "mcpServers": {
+    "beatops": {
+      "command": "beatops-mcp",
+      "type": "stdio"
+    }
+  }
+}
+```
+
+## CLI Commands
+
+All commands support `--format json` for machine-readable output. Data goes to stdout, errors to stderr.
+
+### beatops list
+List all beats in the library.
+Flags: `--format json`
+
+### beatops show <name>
+Show detailed beat information including metadata, templates, and upload status.
+Flags: `--format json`
+
+### beatops analyze <name>
+Analyze audio to detect BPM, key, genre, and mood.
+Flags: `--format json`
+
+### beatops status
+Check YouTube and SoundCloud connection status.
+Flags: `--format json`
+
+### beatops config get
+Show all configuration values.
+Flags: `--format json`
+
+### beatops config set <key> <value>
+Set a configuration value. Supported keys: beats_folder, default_template_set.
+
+### beatops connect <platform>
+Connect a YouTube or SoundCloud account via OAuth. Opens browser for authentication.
+Flags: `--shorts` (connect YouTube Shorts channel), `--yes` (skip confirmation), `--format json`
+
+### beatops scan <path>
+Scan a folder for beat files and add them to the library.
+Flags: `--format json`
+
+### beatops check <name>
+Pre-validate a beat for upload. Shows missing metadata, unconnected platforms, and other issues.
+Flags: `--format json`
+
+### beatops upload <name> --to <platforms>
+Upload a beat to one or more platforms. Platforms: youtube, soundcloud (comma-separated).
+Flags: `--dry-run` (preview without uploading), `--yes` (skip confirmation), `--format json`
+
+### beatops pipeline <name> --to <platforms>
+Full pipeline: analyze audio, generate video/thumbnails/tags, then upload. Platforms: youtube, soundcloud (comma-separated).
+Flags: `--dry-run` (preview without executing), `--yes` (skip confirmation), `--format json`
+
+### beatops batch [names...] --to <platforms>
+Batch process multiple beats. Platforms: youtube, soundcloud (comma-separated).
+Flags: `--all` (process all unuploaded beats), `--upload-only` (skip analysis/generation), `--yes` (skip confirmation), `--format json`
+
+### beatops analytics <name>
+View analytics for a beat (views, likes, comments) from connected platforms.
+Flags: `--format json`
+
+## MCP Tools
+
+### Safe (no confirmation needed)
+- list_beats - List all beats in the library
+- get_beat(beat_name) - Get detailed beat information including metadata, templates, upload status
+- get_platform_status - Check YouTube and SoundCloud connection status
+- get_readiness(beat_name) - Check if a beat is ready to upload (missing metadata, unconnected platforms)
+- render_template(beat_name, platform) - Preview rendered metadata for a specific platform
+- analyze_beat(beat_name) - Analyze audio to detect BPM, key, genre, and mood
+- generate_images(beat_name) - Generate thumbnail images for the beat
+- generate_video(beat_name) - Generate upload video with audio visualization
+- generate_tags(beat_name) - Generate SEO-optimized tags
+
+### Confirm (requires user approval before execution)
+- upload_beat(beat_name, platform) - Upload beat to youtube or soundcloud
+
+## Permission Model
+
+- Safe tier: Most operations execute without confirmation (reading data, analysis, generation)
+- Confirm tier: Uploads to YouTube and SoundCloud require user approval
+- Blocked tier: Credential changes, account disconnect, and data deletion are not exposed as MCP tools
+
+## Desktop App Features
+
+- DAW Plugin: VST3/AU plugin that captures the beat at export and publishes it without leaving the DAW
+- Audio Analysis: Automatic BPM, key detection, genre classification, and mood tagging
+- Video Creation: Generate YouTube videos with visualizer, thumbnails, and metadata
+- Multi-Platform Upload: Upload to YouTube, BeatStars, and SoundCloud simultaneously
+- Template System: Reusable templates for titles, descriptions, tags with dynamic variables
+- Stem Management: Auto-detect, link, and zip stems for BeatStars
+- Scheduling: Schedule uploads for specific dates and times across platforms
+- SEO Tags: AI-generated tags optimized for search and discovery
+
+## DAW Plugin (BeatOps Release)
+
+BeatOps Release is a VST3/AU plugin that sits on your master bus and captures your beat as you bounce, then publishes it to YouTube, YouTube Shorts, BeatStars and SoundCloud. You do not leave the DAW and you do not re-import the exported file: the export itself is the trigger.
+
+- Master: captures a bit-perfect copy of your mix. Your exported WAV is never modified.
+- Stems: an instance on any track is captured sample-aligned with the master. Real authored busses, not AI-separated guesses. Silent and empty tracks are dropped.
+- Producer tag: captured with your own effects at the exact sample position you placed it, mixed into the MP3 preview only, never into the clean WAV.
+- BPM: read from the DAW transport, so it is exact rather than estimated from the audio.
+- Tested DAWs: FL Studio, Ableton Live, Logic Pro, REAPER, Cubase, Studio One, GarageBand, on macOS and Windows.
+- Not supported: Pro Tools (AAX only) and the MPC desktop software.
+- Formats: signed VST3 and AU on macOS, signed VST3 on Windows. Installs from inside the BeatOps app under Settings, DAW Plugin, Install. Requires BeatOps 3.0 or later.
+- Included on every plan, the free one too.
+
+See https://beatops.io/plugin
+
+## Installation
+
+Download the BeatOps desktop app from https://beatops.io/download (Mac + Windows). The DAW plugin, CLI and MCP server are included; no extra installation needed.
+
+## Pricing
+
+- Starter: Free. 10 publishes per platform in total (a one-time allowance, not a weekly reset), 10 image and 10 video generations, includes a small BeatOps watermark.
+- Growth: $11.99/month (early adopter price, normally $17.99). 4 publishes per platform per week, unlimited image/video generations, unlimited templates, no watermarks, 90-day analytics.
+- Scale: $23.99/month (early adopter price, normally $31.99). Unlimited publishes.
+
+When the Starter allowance is used up, the app, library, templates and analytics keep working; publishing new beats requires an upgrade. All plans include the DAW plugin, CLI and MCP access. 14-day refund, cancel anytime. See https://beatops.io/pricing
+
+## Supported Platforms
+
+- YouTube (upload, analytics, scheduling): available via desktop app, DAW plugin, CLI, and MCP
+- SoundCloud (upload, scheduling): available via desktop app, DAW plugin, CLI, and MCP
+- BeatStars (upload, stem management): desktop app and DAW plugin, not available via CLI or MCP
 
 ## Links
 
-- [Website](https://beatops.io): Product homepage
-- [Features](https://beatops.io/features.html): Full feature overview
-- [Pricing](https://beatops.io/pricing.html): Plans and pricing (free Starter tier available)
-- [Help](https://beatops.io/help.html): Documentation and support
-- [Blog](https://beatops.io/blog.html): Updates and stories
+- Website: https://beatops.io
+- Download: https://beatops.io/download
+- Pricing: https://beatops.io/pricing
+- DAW Plugin: https://beatops.io/plugin
+- DAW Plugin setup: https://beatops.io/help/daw-plugin
+- CLI Setup: https://beatops.io/help/cli-setup
+- MCP Setup: https://beatops.io/help/mcp-setup
+- PyPI: https://pypi.org/project/beatops/
+- GitHub: https://github.com/snarebes/BeatOps
+
+## Optional
+
+- Features: https://beatops.io/features
+- Help center: https://beatops.io/help
+- Getting started: https://beatops.io/help/getting-started
+- Blog: https://beatops.io/blog
+- The True Cost of Manual Beat Uploads: https://beatops.io/blog/the-true-cost-of-manual-beat-uploads
+- Why I Built BeatOps: https://beatops.io/blog/building-beatops
+- About: https://beatops.io/about
+- Contact: support@beatops.io / https://beatops.io/contact
