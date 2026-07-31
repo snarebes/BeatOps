@@ -103,7 +103,9 @@ Then ask your agent to release a beat, check status, or run the full pipeline. S
 | Platform | Download |
 |----------|----------|
 | macOS (Apple Silicon) | [Download DMG](https://github.com/snarebes/BeatOps/releases/latest) |
-| Windows | [Download EXE](https://github.com/snarebes/BeatOps/releases/latest) |
+| Windows | [Get from Microsoft Store](https://apps.microsoft.com/detail/9NQTDNPDQRLT) |
+
+The Windows Store build is verified by Microsoft, installs without security warnings, and updates automatically. Prefer a direct installer? Grab the [.exe from the latest release](https://github.com/snarebes/BeatOps/releases/latest) (not code-signed yet, so Windows SmartScreen warns on first run).
 
 Or visit the [download page](https://beatops.io/download.html) for more options.
 
