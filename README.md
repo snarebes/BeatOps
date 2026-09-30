@@ -43,7 +43,15 @@ Fill in your beat info, select your platforms, and hit Process & Upload. BeatOps
 
 Create consistent thumbnails across all formats. Choose a visual style, set your colors, and every beat gets the same professional look.
 
+Your beat videos move with the music: a visualizer that reacts to your beat, with your title, BPM and key on screen. On Auto, BeatOps picks the look from the mood of each beat.
+
 ![Template Editor](screenshots/thumbnail-screenshot.png)
+
+## Your producer tag and Shorts, from one export
+
+Only have an untagged file? BeatOps adds your producer tag with delay and reverb, fitted to each beat's tempo, and clips a vertical Short from the part you pick. Your clean master stays for the buyer.
+
+![Make a Short](screenshots/short-maker-screenshot.png)
 
 ## Know what your audience wants
 
